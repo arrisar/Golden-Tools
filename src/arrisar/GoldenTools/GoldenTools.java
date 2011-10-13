@@ -11,9 +11,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.util.config.Configuration;
 
-import com.nijiko.permissions.PermissionHandler;
-import com.nijikokun.bukkit.Permissions.Permissions;
-import org.bukkit.plugin.Plugin;
+//import com.nijiko.permissions.PermissionHandler;
+//import com.nijikokun.bukkit.Permissions.Permissions;
+//xcfimport org.bukkit.plugin.Plugin;
 
 /**
  * Golden Tools - Allowing you to harvest certain blocks using Golden Tools
@@ -23,27 +23,27 @@ public class GoldenTools extends JavaPlugin {
 	private final GoldenToolsBlockListener blockListener = new GoldenToolsBlockListener(this);
 	private final Logger log = Logger.getLogger("Minecraft");
 
-	public boolean usepermissions;
+	//public boolean usepermissions;
 
 
-	public static PermissionHandler permissionHandler;
-	private void setupPermissions() {
-	    if (permissionHandler != null) {
-	        return;
-	    }
+	//public static PermissionHandler permissionHandler;
+	//private void setupPermissions() {
+	 //   if (permissionHandler != null) {
+	  //      return;
+	 //  }
 
-	    Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
+	  //  Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
 
-	    if (permissionsPlugin == null) {
-	        log.info("[" + getDescription().getName() + "] Permission system not detected, Everyone can use Golden Tools!");
-	        usepermissions = false;
-	        return;
-	    }
+	  //  if (permissionsPlugin == null) {
+	  //      log.info("[" + getDescription().getName() + "] Permission system not detected, Everyone can use Golden Tools!");
+	  //      usepermissions = false;
+	   //     return;
+	  //  }
 
-	    permissionHandler = ((Permissions) permissionsPlugin).getHandler();
-	    log.info("[" + getDescription().getName() + "] Found and will use plugin "+((Permissions)permissionsPlugin).getDescription().getFullName());
-	    usepermissions = true;
-	}
+	  //  permissionHandler = ((Permissions) permissionsPlugin).getHandler();
+	   // log.info("[" + getDescription().getName() + "] Found and will use plugin "+((Permissions)permissionsPlugin).getDescription().getFullName());
+	 //   usepermissions = true;
+	//}
 	
 	// Config
 	public List<Integer> iceBlocks;
@@ -54,6 +54,9 @@ public class GoldenTools extends JavaPlugin {
 	public List<Integer> shrubBlocks;
 	public List<Integer> deadshrubBlocks;
 	public List<Integer> stoneBlocks;
+	public List<Integer> glowStoneBlocks;
+	public List<Integer> diamondBlocks;
+	public List<Integer> coalBlocks;
 	public List<Integer> iceTools;
 	public List<Integer> rshroomTools;
 	public List<Integer> bshroomTools;
@@ -62,6 +65,9 @@ public class GoldenTools extends JavaPlugin {
 	public List<Integer> shrubTools;
 	public List<Integer> deadshrubTools;
 	public List<Integer> stoneTools;
+	public List<Integer> glowStoneTools;
+	public List<Integer> diamondTools;
+	public List<Integer> coalTools;
 
 	public void onDisable() {
 		log.info("[" + getDescription().getName() + "] " + getDescription().getName() + " was disabled.");
@@ -78,6 +84,9 @@ public class GoldenTools extends JavaPlugin {
 		shrubBlocks = config.getIntList("shrubBlocks", Arrays.asList(31));
 		deadshrubBlocks = config.getIntList("deadshrubBlocks", Arrays.asList(32));
 		stoneBlocks = config.getIntList("stoneBlocks", Arrays.asList(1));
+		glowStoneBlocks = config.getIntList("glowStoneBlocks", Arrays.asList(89));
+		diamondBlocks = config.getIntList("diamondBlocks", Arrays.asList(56));
+		coalBlocks = config.getIntList("coalBlocks", Arrays.asList(16));
 		
 		iceTools = config.getIntList("iceTools", Arrays.asList(285));
 		rshroomTools = config.getIntList("rshroomTools", Arrays.asList(294));
@@ -87,13 +96,16 @@ public class GoldenTools extends JavaPlugin {
 		shrubTools = config.getIntList("shrubTools", Arrays.asList(284));
 		deadshrubTools = config.getIntList("deadshrubTools", Arrays.asList(284));
 		stoneTools = config.getIntList("stoneTools", Arrays.asList(285));
+		glowStoneTools = config.getIntList("glowStoneTools", Arrays.asList(285));
+		diamondTools = config.getIntList("diamondTools", Arrays.asList(285));
+		coalTools = config.getIntList("coalTools", Arrays.asList(285));
 	}
 	
 	public void onEnable() {
 		
 		File configfile = new File(getDataFolder(), "config.yml");
 		Configuration config = getConfiguration();
-		setupPermissions();
+		//setupPermissions();
 		if (!configfile.exists()) {
 			log.info("[" + getDescription().getName() + "] Config not found. Creating default config file.");
 			
@@ -105,6 +117,9 @@ public class GoldenTools extends JavaPlugin {
 			config.setProperty("shrubTools", Arrays.asList(284));
 			config.setProperty("deadshrubTools", Arrays.asList(284));
 			config.setProperty("stoneTools", Arrays.asList(285));
+			config.setProperty("glowStoneTools", Arrays.asList(285));
+			config.setProperty("diamondTools", Arrays.asList(285));
+			config.setProperty("coalTools", Arrays.asList(285));
 			
 			config.save();
 			
